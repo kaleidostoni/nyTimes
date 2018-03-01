@@ -53,17 +53,27 @@ function addNews() {
     const data = JSON.parse(this.responseText);
     const response = data.response;
     const article = data.response.docs;
+    console.log(article);
     article.map(function (article, index) {
         if (index <= 4) {
             const title = article.headline.main;
             //console.log(title);
             const snippet = article.snippet;
             //console.log(snippet);
+            const url = article.web_url;
+            console.log(url);
+            let h3 = document.createElement('h3');
+            h3.innerText=title;
             let li = document.createElement('li');
                 li.className = 'articleClass';
                 li.innerText = snippet;
-
+            let anchor = document.createElement('a');
+            anchor.innerText = "Link to article here";
+            anchor.setAttribute("href", url);
+                responseContainer.appendChild(h3);
                 responseContainer.appendChild(li);
+                responseContainer.appendChild(anchor);
+                
         }
     })
 };
