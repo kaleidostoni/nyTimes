@@ -16,7 +16,7 @@ const form = document.getElementById('search-form');
 
  // función para crear el request de la API
 
- const getNews = ()=>{
+    function getNews(){
      const articleRequest = new XMLHttpRequest();
      articleRequest.open('GET',`http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=dbc4e3e5dd66440ab826a9887bb84cd7`);
      articleRequest.onload = addNews;
@@ -25,17 +25,26 @@ const form = document.getElementById('search-form');
  }
 
 //función cuando hay error en la petición
-const handlerError = ()=>{
+function handlerError(){
     console.log('Se ha presentado un error');
 }
 
 //función agregar noticias
-const addNews = ()=>{
+function addNews(){
     //console.log(this.responseText);
     const data = JSON.parse(this.responseText);
-    //console.log(data);
+    console.log(data);
     const response = data.response;
-    //console.log(response);
+    console.log(response);
+    const article = data.response.docs[0];
+    console.log(article);
+    const title = article.headline.main;
+    console.log(title);
+    const snippet = article.snippet;
+
     let li = document.createElement('li');
-    li.className
+    li.className = 'articleClass';
+    li.innerText = snippet;
+
+    responseContainer.appendChild(li);
 };
